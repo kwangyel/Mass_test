@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: "https://zhichar.ddnsfree.com/cpi"
+  API_URL: "https://zhichar.ddnsfree.com/api"
 };
 
 /*
