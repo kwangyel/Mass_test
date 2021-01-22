@@ -4,7 +4,6 @@ import { MatSnackBar, MatDialog, MatBottomSheet } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { DataService } from '../Services/data.service';
-import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { BottomsheetComponent } from '../bottomsheet/bottomsheet.component';
@@ -12,7 +11,7 @@ import { BottomsheetComponent } from '../bottomsheet/bottomsheet.component';
 export class Building{
   lat: number;
   lng: number;
-  zond_id: number;
+  sub_zone_id: number;
 }
 
 @Component({
@@ -234,22 +233,28 @@ export class MapComponent implements OnInit {
       if (result === true) {
         this.building.lat = latlng.lat;
         this.building.lng = latlng.lng;
-        this.building.zond_id= Number(sessionStorage.getItem('subZoneId'));
-    //     this.dataService.postNewBuilding(this.building).subscribe(response => {
-    //       console.log(response);
-    //       this.buildingId = response.data.id;
+        this.building.sub_zone_id = Number(sessionStorage.getItem('zone'));
+        this.dataService.postNewBuilding(this.building).subscribe(response => {
+          console.log(response);
+          this.buildingId = response.data.id;
 
-    //       this.snackBar.open('Building number ' + this.buildingId + ' has been successfully identified', '', {
-    //         duration: 3000,
-    //         verticalPosition: 'top',
-    //         panelClass: ['success-snackbar']
-    //       });
-    //       if (sessionStorage.getItem('transactionType') === 'registration') {
-    //         this.router.navigate(['register', this.buildingId]);
-    //       } else {
-    //         this.router.navigate(['dashboard', this.buildingId]);
-    //       }
-    //     });
+          this.snackBar.open('Building number ' + this.buildingId + ' has been successfully identified', '', {
+            duration: 3000,
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+          this.isAddAllowed = false;
+          if(this.geojson!== undefined){
+            this.map.removeLayer(this.geojson)
+            this.geojson= undefined
+          }
+          if(this.newMarker !== undefined){
+            this.map.removeLayer(this.newMarker)
+            this.newMarker = undefined
+          }
+
+          this.onMapReady(this.map)
+        });
       }else{
         this.map.removeLayer(this.newMarker)
         this.isAddAllowed = false;

@@ -50,6 +50,6 @@ import { BottomsheetComponent } from './bottomsheet/bottomsheet.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[BottomsheetComponent]
+  entryComponents:[ConfirmDialogComponent, BottomsheetComponent]
 })
 export class AppModule { }
