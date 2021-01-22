@@ -37,6 +37,7 @@ export class MapComponent implements OnInit {
   zoneId
   locationId:any
 
+  permission = false
   isAddAllowed = false
   isLocation = false
 
@@ -172,21 +173,25 @@ export class MapComponent implements OnInit {
   }
 
   getMyLocation(){
-    this.isLocation = true
+    this.checkPermission()
+    let nav = (navigator as any).geolocation.getCurrentPosition((e)=>{})
 
-    if(this.locationId !== undefined){
-      if(this.latlng !== undefined){
-        this.map.setView(this.latlng.latlng,17)
+    if(this.permission === true){
+      this.isLocation = true
+      if(this.locationId !== undefined){
+        if(this.latlng !== undefined){
+          this.map.setView(this.latlng.latlng,17)
+        }else{
+          this.latlng = (navigator as any).geolocation.getCurrentPosition((e)=>{
+            console.log(e)
+            this.latlng = {
+              latlng: L.latLng(e.coords.latitude,e.coords.longtitude)
+            }
+          })
+        }
       }else{
-        this.latlng = (navigator as any).geolocation.getCurrentPosition((e)=>{
-          console.log(e)
-          this.latlng = {
-            latlng: L.latLng(e.coords.latitude,e.coords.longtitude)
-          }
-        })
+        this.locationId = this.map.locate({watch:true,enableHighAccuracy:true});
       }
-    }else{
-      this.locationId = this.map.locate({watch:true,enableHighAccuracy:true});
     }
   }
 
@@ -260,6 +265,33 @@ export class MapComponent implements OnInit {
         }).addTo(map);
     });
   }
+
+  checkPermission(){
+    (navigator as any).permissions.query({name: 'geolocation'}).then((status)=>{
+      if(status.state == "denied"){
+          this.snackBar.open('Location permission needed to use GPS. Please grant location access to you browser by going to settings.', '', {
+            duration: 3000,
+            verticalPosition: 'top',
+            panelClass: ['info-snackbar']
+          });
+          this.permission = false
+      }else{
+          this.permission = true 
+        // permission granted
+      }
+      status.onchange = ()=>{
+        if(status.state !== "denied"){
+          this.permission = true 
+          this.snackBar.open('Location permission has been successfully set', '', {
+            duration: 3000,
+            verticalPosition: 'top',
+            panelClass: ['info-snackbar']
+          });
+        }
+      }
+    })
+  }
+
 
   presentAlert(latlng) {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
