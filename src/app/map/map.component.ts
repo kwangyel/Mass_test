@@ -33,7 +33,11 @@ export class MapComponent implements OnInit {
   geobound:any;
   geojson:any
 
+  zoneId;
+  locationId:any
+
   isAddAllowed = false
+  isLocation = false
 
   myMarker = L.icon({
     iconUrl: 'assets/mymarker.png',
@@ -164,12 +168,28 @@ export class MapComponent implements OnInit {
   }
 
   getMyLocation(){
-    this.map.locate({watch:true,enableHighAccuracy:true});
+    if(!this.isLocation){
+
+      // if(this.locationId === undefined){
+        this.locationId = this.map.locate({watch:true,enableHighAccuracy:true});
+      // }
+      this.isLocation = !this.isLocation
+    }else{
+      if(this.mylocation !== undefined){
+        this.map.removeLayer(this.mylocation);
+        this.mylocation = undefined
+      }
+      if(this.mycircle !== undefined){
+        this.map.removeLayer(this.mycircle);
+        this.mycircle = undefined
+      }
+      this.map.stopLocate()
+    }
   }
 
   onMapReady(map: L.Map) {
-    const zoneId = Number(sessionStorage.getItem('zone'));
-    this.geobound= this.http.get(`/assets/geojson/conv_T${zoneId}.geojson`).subscribe((json:any)=>{
+    this.zoneId = Number(sessionStorage.getItem('zone'));
+    this.geobound= this.http.get(`/assets/geojson/conv_T${this.zoneId}.geojson`).subscribe((json:any)=>{
       this.bound= L.geoJSON(json,{
         style: (feature)=>{
           return {
@@ -180,10 +200,12 @@ export class MapComponent implements OnInit {
       }).addTo(this.map);
       this.map.fitBounds(this.bound.getBounds());
     })
+    this.getBuilding(map)
+  }
 
-
+  getBuilding(map: L.Map){
     // Added buildings here
-    this.http.get(`${this.API_URL}/get-str/${zoneId}`).subscribe((json: any) => {
+    this.http.get(`${this.API_URL}/get-str/${this.zoneId}`).subscribe((json: any) => {
       this.json = json;
       console.log(json);
       this.geojson = L.geoJSON(this.json, {
@@ -206,7 +228,7 @@ export class MapComponent implements OnInit {
                   this.geojson= undefined
                 }
 
-                this.onMapReady(this.map)
+                this.getBuilding(this.map)
               })
             });
           }, pointToLayer: (feature, latLng) => {
@@ -253,7 +275,7 @@ export class MapComponent implements OnInit {
             this.newMarker = undefined
           }
 
-          this.onMapReady(this.map)
+          this.getBuilding(this.map)
         });
       }else{
         this.map.removeLayer(this.newMarker)
