@@ -177,6 +177,17 @@ export class MapComponent implements OnInit {
       if(this.locationId !== undefined){
         if(this.latlng !== undefined){
           this.map.setView(this.latlng.latlng,17)
+          if(this.mylocation !== undefined){
+            this.map.removeLayer(this.mylocation);
+          }
+          this.mylocation = L.marker(this.latlng.latlng,{icon: this.myMarker}).addTo(this.map);
+
+          if(this.latlng.radius<100){
+            if(this.mycircle !== undefined){
+              this.map.removeLayer(this.mycircle);
+            }
+            this.mycircle = L.circle(this.latlng.latlng,this.latlng.radius).addTo(this.map);
+          }
         }else{
           this.latlng = (navigator as any).geolocation.getCurrentPosition((e)=>{
             console.log(e)
