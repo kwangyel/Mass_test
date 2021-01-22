@@ -40,6 +40,7 @@ export class MapComponent implements OnInit {
   permission = false
   isAddAllowed = false
   isLocation = false
+  isDisabled = true
 
   myMarker = L.icon({
     iconUrl: 'assets/mymarker.png',
@@ -118,7 +119,7 @@ export class MapComponent implements OnInit {
               verticalPosition: 'top',
               duration: 3000
             });
-            this.isLocation =false
+            this.isDisabled = true
           }
           if (err.code === 2) {
             this.snackBar.open('Your location couldnot be determined', '', {
@@ -136,6 +137,7 @@ export class MapComponent implements OnInit {
 
     this.map.on('locationfound',(e)=>{
       if(this.isLocation){
+        this.isDisabled = false
         var radius = e.accuracy;
         this.latlng = e
         if(this.mylocation !== undefined){
