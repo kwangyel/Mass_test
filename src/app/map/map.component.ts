@@ -173,7 +173,6 @@ export class MapComponent implements OnInit {
   }
 
   getMyLocation(){
-    this.checkPermission()
       this.isLocation = true
       if(this.locationId !== undefined){
         if(this.latlng !== undefined){
