@@ -39,10 +39,25 @@ export class DataService {
 
   getAllZones(){
     return this.http
-      .get<any>(`${this.API_URL}/get-zones/21`,this.httpOptions)
+      .get<any>(`${this.API_URL}/get-all-zones`,this.httpOptions)
       .pipe(
         catchError(this.handleError)
       )
   }
 
+  setProgress(sid){
+    return this.http
+      .get<any>(`${this.API_URL}/markProgress/${sid}`,this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+  setComplete(sid){
+    return this.http
+      .get<any>(`${this.API_URL}/markComplete/${sid}`,this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
 }

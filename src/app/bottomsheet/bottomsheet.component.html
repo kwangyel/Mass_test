@@ -1,0 +1,14 @@
+<div style = "width: 100%; display: flex; flex-direction: row; justify-content: flex-end; ">
+  <mat-icon (click)="closeSheet()" style="vertical-align: right;">close</mat-icon>
+</div>
+<mat-card >
+  <mat-card-header>
+    <mat-card-title>Building ID: {{data}}</mat-card-title>
+    <!-- TODO Image of the building should be here -->
+  </mat-card-header>
+      <mat-chip-list>
+          <mat-chip color = "accent" selected = "true" (click)="setProgress()">Set Progress</mat-chip>
+          <mat-chip color = "primary" selected = "true" (click)="setComplete()">Set Complete</mat-chip>
+      </mat-chip-list>
+</mat-card>
+<br>
