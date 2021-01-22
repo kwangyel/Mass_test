@@ -174,9 +174,6 @@ export class MapComponent implements OnInit {
 
   getMyLocation(){
     this.checkPermission()
-    let nav = (navigator as any).geolocation.getCurrentPosition((e)=>{})
-
-    if(this.permission === true){
       this.isLocation = true
       if(this.locationId !== undefined){
         if(this.latlng !== undefined){
@@ -192,7 +189,6 @@ export class MapComponent implements OnInit {
       }else{
         this.locationId = this.map.locate({watch:true,enableHighAccuracy:true});
       }
-    }
   }
 
   stopLocation(){
