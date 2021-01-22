@@ -118,6 +118,7 @@ export class MapComponent implements OnInit {
               verticalPosition: 'top',
               duration: 3000
             });
+            this.isLocation =false
           }
           if (err.code === 2) {
             this.snackBar.open('Your location couldnot be determined', '', {
