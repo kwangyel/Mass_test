@@ -33,7 +33,8 @@ export class MapComponent implements OnInit {
   geobound:any;
   geojson:any
 
-  zoneId;
+  latlng: any
+  zoneId
   locationId:any
 
   isAddAllowed = false
@@ -132,17 +133,20 @@ export class MapComponent implements OnInit {
     });
 
     this.map.on('locationfound',(e)=>{
-      var radius = e.accuracy;
-      if(this.mylocation !== undefined){
-        this.map.removeLayer(this.mylocation);
-      }
-      this.mylocation = L.marker(e.latlng,{icon: this.myMarker}).addTo(this.map);
-
-      if(radius<100){
-        if(this.mycircle !== undefined){
-          this.map.removeLayer(this.mycircle);
+      if(this.isLocation){
+        var radius = e.accuracy;
+        this.latlng = e
+        if(this.mylocation !== undefined){
+          this.map.removeLayer(this.mylocation);
         }
-        this.mycircle = L.circle(e.latlng,radius).addTo(this.map);
+        this.mylocation = L.marker(e.latlng,{icon: this.myMarker}).addTo(this.map);
+
+        if(radius<100){
+          if(this.mycircle !== undefined){
+            this.map.removeLayer(this.mycircle);
+          }
+          this.mycircle = L.circle(e.latlng,radius).addTo(this.map);
+        }
       }
     });
 
@@ -168,23 +172,36 @@ export class MapComponent implements OnInit {
   }
 
   getMyLocation(){
-    if(!this.isLocation){
+    this.isLocation = true
 
-      // if(this.locationId === undefined){
-        this.locationId = this.map.locate({watch:true,enableHighAccuracy:true});
-      // }
-      this.isLocation = !this.isLocation
+    if(this.locationId !== undefined){
+      if(this.latlng !== undefined){
+        this.map.setView(this.latlng.latlng,17)
+      }else{
+        this.latlng = (navigator as any).geolocation.getCurrentPosition((e)=>{
+          console.log(e)
+          this.latlng = {
+            latlng: L.latLng(e.coords.latitude,e.coords.longtitude)
+          }
+        })
+      }
     }else{
-      if(this.mylocation !== undefined){
-        this.map.removeLayer(this.mylocation);
-        this.mylocation = undefined
-      }
-      if(this.mycircle !== undefined){
-        this.map.removeLayer(this.mycircle);
-        this.mycircle = undefined
-      }
-      this.map.stopLocate()
+      this.locationId = this.map.locate({watch:true,enableHighAccuracy:true});
     }
+  }
+
+  stopLocation(){
+    this.isLocation = false
+    if(this.mylocation !== undefined){
+      this.map.removeLayer(this.mylocation);
+      this.mylocation = undefined
+    }
+    if(this.mycircle !== undefined){
+      this.map.removeLayer(this.mycircle);
+      this.mycircle = undefined
+    }
+    // Dont know if we should be stopping this.
+    // this.map.stopLocate()
   }
 
   onMapReady(map: L.Map) {
