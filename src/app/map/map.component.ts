@@ -155,6 +155,19 @@ export class MapComponent implements OnInit {
     });
   }
 
+  toggleAdd() {
+    this.snackBar.open('Tap on the structure/building you want to add', '', {
+      duration: 5000,
+      verticalPosition: 'top',
+      panelClass: ['info-snackbar']
+    });
+    this.isAddAllowed = true;
+  }
+
+  getMyLocation(){
+    this.map.locate({watch:true,enableHighAccuracy:true});
+  }
+
   onMapReady(map: L.Map) {
     const zoneId = Number(sessionStorage.getItem('zone'));
     this.geobound= this.http.get(`/assets/geojson/conv_T${zoneId}.geojson`).subscribe((json:any)=>{
