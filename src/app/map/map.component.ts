@@ -206,6 +206,8 @@ export class MapComponent implements OnInit {
 
   stopLocation(){
     this.isLocation = false
+    this.isDisabled = true
+    
     if(this.mylocation !== undefined){
       this.map.removeLayer(this.mylocation);
       this.mylocation = undefined
