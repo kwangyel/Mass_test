@@ -13,7 +13,7 @@
     <div class="form-body">
       <form [formGroup]="zoneForm">
         <mat-form-field class="justifier">
-          <mat-label>Sub-zone</mat-label>
+          <mat-label>Select Zone</mat-label>
           <mat-select formControlName="subZoneControl" name="subZone" required>
             <mat-option *ngFor="let subZone of subZones" [value]="subZone.id">
               {{subZone.name}}
