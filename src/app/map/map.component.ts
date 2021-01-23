@@ -222,8 +222,8 @@ export class MapComponent implements OnInit {
 
   onMapReady(map: L.Map) {
     this.zoneId = Number(sessionStorage.getItem('zone'));
-    this.geobound= this.http.get(`/assets/geojson/conv_T${this.zoneId}.geojson`).subscribe((json:any)=>{
-      this.bound= L.geoJSON(json,{
+    this.geobound= this.http.get(`https://zhichar-pling.ddnsfree.com/zone/map/getzone/${this.zoneId}`).subscribe((json:any)=>{
+      this.bound= L.geoJSON(json.data,{
         style: (feature)=>{
           return {
             color:"red",
