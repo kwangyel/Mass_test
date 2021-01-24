@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { BottomsheetComponent } from './bottomsheet/bottomsheet.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { BottomsheetComponent } from './bottomsheet/bottomsheet.component';
     SelectZoneComponent,
     MapComponent,
     ConfirmDialogComponent,
-    BottomsheetComponent
+    BottomsheetComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
