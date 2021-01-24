@@ -11,6 +11,7 @@ import {
   MatBottomSheetModule,
   MatCardModule,
   MatChipsModule,
+  MatInputModule,
 } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +40,7 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     MatCardModule,
     MatChipsModule,
+    MatInputModule,
     ReactiveFormsModule,
     MatToolbarModule,
     HttpClientModule,
