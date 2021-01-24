@@ -6,10 +6,10 @@
       <div class="form-body">
         <form [formGroup]="loginForm">
           <mat-form-field class="justifier">
-            <input matInput type="text" placeholder="CID Number" class="form-input" name="cid" formControlName="cid" [ngClass]="{ 'is-invalid': submitted && f.cid.errors }" required autofocus>
+            <input matInput type="text" placeholder="CID Number" class="form-input" name="cid" formControlName="cid" required autofocus>
           </mat-form-field>
           <mat-form-field class="justifier">
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" class="form-input" name="password" formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.cid.errors }" required>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" class="form-input" name="password" formControlName="password"  required>
             <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
