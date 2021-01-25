@@ -26,14 +26,14 @@ export class BottomsheetComponent implements OnInit {
   }
 
   setProgress(){
-    this.dataService.setProgress(this.data).subscribe(res=>{
+    this.dataService.setProgress(this.data.building_id).subscribe(res=>{
       this._bottomSheetRef.dismiss()
       this.router.navigate(['map'])
     })
   }
 
   setComplete(){
-    this.dataService.setComplete(this.data).subscribe(res=>{
+    this.dataService.setComplete(this.data.building_id).subscribe(res=>{
       this._bottomSheetRef.dismiss()
       this.router.navigate(['map'])
     })
