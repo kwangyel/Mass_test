@@ -257,7 +257,7 @@ export class MapComponent implements OnInit {
               this.buildingId = feature.properties.structure_id;
               console.log(this.buildingId);
               this._bottomSheet.open(BottomsheetComponent,{
-                data: {building_id: this.buildingId, showEdit: this.showedit}
+                data: {building_id: this.buildingId, remarks:feature.properties.remarks, showEdit: this.showedit}
               })
               this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe(()=>{
                 console.log("reloaded")

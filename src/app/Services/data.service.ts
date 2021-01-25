@@ -68,4 +68,12 @@ export class DataService {
         catchError(this.handleError)
       );
   }
+
+  postRemarks(item){
+    return this.http
+      .post<any>(`${this.API_URL}/setRemarks`, item, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }

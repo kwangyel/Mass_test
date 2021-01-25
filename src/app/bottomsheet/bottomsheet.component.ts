@@ -2,6 +2,7 @@ import { Component, OnInit, Inject} from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
+import { ThemeService } from 'ng2-charts';
 import { RemarksDialogComponent } from '../remarks-dialog/remarks-dialog.component';
 import { DataService } from '../Services/data.service';
 
@@ -50,7 +51,18 @@ export class BottomsheetComponent implements OnInit {
     })
     remarksDialog.afterClosed().subscribe(result => {
       if(result !== undefined){
-        console.log(result)
+        let obj = {
+          structure_id: this.data.building_id,
+          remarks: result
+        }
+        this.dataService.postRemarks(obj).subscribe(res=>{
+          if(res.success === "true"){
+            console.log("remarks submitted successfully")
+            this._bottomSheetRef.dismiss()
+          }else{
+            console.log(res)
+          }
+        })
       }else{
         console.log("not submitted")
       }

@@ -4,6 +4,7 @@
 <mat-card >
   <mat-card-header>
     <mat-card-title>Building ID: {{data.building_id}}</mat-card-title>
+    <mat-card-subtitle *ngIf = "data.remarks">Remarks : {{data.remarks}}</mat-card-subtitle>
     <!-- TODO Image of the building should be here -->
   </mat-card-header>
       <mat-chip-list *ngIf = "showedit">
