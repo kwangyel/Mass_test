@@ -27,6 +27,11 @@
         <mat-icon>arrow_forward</mat-icon> Proceed
       </button>
     </div>
+    <div class="form-footer" *ngIf = "showSum">
+      <button mat-raised-button class="btn custom-btn" (click)="showSummary()" >
+        <mat-icon>arrow_forward</mat-icon>Summary 
+      </button>
+    </div>
   </div>
 </div>
 

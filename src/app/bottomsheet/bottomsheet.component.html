@@ -3,10 +3,10 @@
 </div>
 <mat-card >
   <mat-card-header>
-    <mat-card-title>Building ID: {{data}}</mat-card-title>
+    <mat-card-title>Building ID: {{data.building_id}}</mat-card-title>
     <!-- TODO Image of the building should be here -->
   </mat-card-header>
-      <mat-chip-list>
+      <mat-chip-list *ngIf = "showedit">
           <mat-chip color = "accent" selected = "true" (click)="setProgress()">Set Progress</mat-chip>
           <mat-chip color = "primary" selected = "true" (click)="setComplete()">Set Complete</mat-chip>
           <mat-chip color = "info" selected = "true" (click)="remarks()">Remarks</mat-chip>

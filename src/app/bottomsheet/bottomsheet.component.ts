@@ -11,6 +11,7 @@ import { DataService } from '../Services/data.service';
   styleUrls: ['./bottomsheet.component.scss']
 })
 export class BottomsheetComponent implements OnInit {
+  showedit = null
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
@@ -21,6 +22,7 @@ export class BottomsheetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.showedit = this.data.showEdit;
   }
 
   setProgress(){

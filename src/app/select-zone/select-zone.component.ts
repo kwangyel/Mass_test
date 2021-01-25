@@ -14,6 +14,8 @@ export class SelectZoneComponent implements OnInit {
 
   subZones = [];
   zoneForm: FormGroup;
+  role = ""
+  showSum = false
 
   constructor(
     private router: Router,
@@ -24,6 +26,10 @@ export class SelectZoneComponent implements OnInit {
   ngOnInit() {
     this.reactiveForm()
     this.getData()
+    this.role = localStorage.getItem('role')
+    if(this.role === "view"){
+      this.showSum = true
+    }
   }
 
   getData(){
@@ -43,5 +49,9 @@ export class SelectZoneComponent implements OnInit {
       sessionStorage.setItem("zone",this.zoneForm.get('subZoneControl').value)
       this.router.navigate(['map'])
     }
+  }
+
+  showSummary(){
+    this.router.navigate(['summary'])
   }
 }

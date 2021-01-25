@@ -41,6 +41,11 @@ export class LoginComponent implements OnInit {
       const password = this.loginForm.get('password').value;
       if(loginId === "321" && password === "321"){
         localStorage.setItem('isAuth',"true")
+        localStorage.setItem('role',"view")
+        this.router.navigate(['select'])
+      }else if(loginId === "123" && password === "123"){
+        localStorage.setItem('isAuth',"true")
+        localStorage.setItem('role',"edit")
         this.router.navigate(['select'])
       }else{
         this.submitted = false;

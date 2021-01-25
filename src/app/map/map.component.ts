@@ -42,6 +42,8 @@ export class MapComponent implements OnInit {
   isLocation = false
   isDisabled = true
 
+  showedit = false 
+
   myMarker = L.icon({
     iconUrl: 'assets/mymarker.png',
     iconSize: [20, 20]
@@ -80,6 +82,14 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.renderMap()
+    let role = localStorage.getItem('role')
+    if(role === "view"){
+      this.showedit = false
+    }
+    if(role === 'edit'){
+      this.showedit = true
+    }
+    
   }
 
 
@@ -247,7 +257,7 @@ export class MapComponent implements OnInit {
               this.buildingId = feature.properties.structure_id;
               console.log(this.buildingId);
               this._bottomSheet.open(BottomsheetComponent,{
-                data: this.buildingId
+                data: {building_id: this.buildingId, showEdit: this.showedit}
               })
               this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe(()=>{
                 console.log("reloaded")
