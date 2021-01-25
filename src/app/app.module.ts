@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { BottomsheetComponent } from './bottomsheet/bottomsheet.component';
 import { LoginComponent } from './login/login.component';
+import { RemarksDialogComponent } from './remarks-dialog/remarks-dialog.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { LoginComponent } from './login/login.component';
     MapComponent,
     ConfirmDialogComponent,
     BottomsheetComponent,
-    LoginComponent
+    LoginComponent,
+    RemarksDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,6 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[ConfirmDialogComponent, BottomsheetComponent]
+  entryComponents:[RemarksDialogComponent, ConfirmDialogComponent, BottomsheetComponent]
 })
 export class AppModule { }

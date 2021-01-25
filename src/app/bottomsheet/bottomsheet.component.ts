@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject} from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
+import { RemarksDialogComponent } from '../remarks-dialog/remarks-dialog.component';
 import { DataService } from '../Services/data.service';
 
 @Component({
@@ -14,6 +16,7 @@ export class BottomsheetComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private _bottomSheetRef: MatBottomSheetRef<BottomsheetComponent>,
     private router: Router,
+    private dialog: MatDialog,
     private dataService: DataService
   ) { }
 
@@ -37,6 +40,21 @@ export class BottomsheetComponent implements OnInit {
 
   closeSheet(){
     this._bottomSheetRef.dismiss()
+  }
+
+  remarks(){
+    const remarksDialog = this.dialog.open(RemarksDialogComponent,{
+      width: '250px',
+      data: "test"
+    })
+    remarksDialog.afterClosed().subscribe(result => {
+      if(result !== undefined){
+        console.log(result)
+      }else{
+        console.log("not submitted")
+      }
+    })
+
   }
 
 }
