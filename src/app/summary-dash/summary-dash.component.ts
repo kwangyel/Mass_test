@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as Chart from 'chart.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary-dash',
@@ -90,6 +91,7 @@ export class SummaryDashComponent implements OnInit,AfterViewInit {
 
   constructor(
     private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -102,6 +104,9 @@ export class SummaryDashComponent implements OnInit,AfterViewInit {
 
   }
 
+  back(){
+    this.router.navigate(['/select'])
+  }
   fetchData(){
     this.northMegaZone.forEach(item =>{
 
