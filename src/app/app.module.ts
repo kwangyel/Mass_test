@@ -21,7 +21,7 @@ import { AppComponent } from './app.component';
 import { SelectZoneComponent } from './select-zone/select-zone.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapComponent } from './map/map.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { BottomsheetComponent } from './bottomsheet/bottomsheet.component';
@@ -30,6 +30,8 @@ import { RemarksDialogComponent } from './remarks-dialog/remarks-dialog.componen
 import { SummaryDashComponent } from './summary-dash/summary-dash.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { HttpInterceptorService } from './Services/http-interceptor.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,15 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     ChartsModule,
     MatProgressBarModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent],
   entryComponents:[RemarksDialogComponent, ConfirmDialogComponent, BottomsheetComponent]
 })

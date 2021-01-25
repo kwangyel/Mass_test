@@ -26,8 +26,8 @@ export class SelectZoneComponent implements OnInit {
   ngOnInit() {
     this.reactiveForm()
     this.getData()
-    this.role = localStorage.getItem('role')
-    if(this.role === "view"){
+    this.role = sessionStorage.getItem('role')
+    if(this.role === "VIEW"){
       this.showSum = true
     }
   }

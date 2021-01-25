@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import decode from 'jwt-decode';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { AuthService } from '../Services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authService: AuthService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar
   ) { }
@@ -39,22 +42,23 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const loginId = this.loginForm.get('cid').value;
       const password = this.loginForm.get('password').value;
-      if(loginId === "321" && password === "321"){
-        localStorage.setItem('isAuth',"true")
-        localStorage.setItem('role',"view")
-        this.router.navigate(['select'])
-      }else if(loginId === "333" && password === "333"){
-        localStorage.setItem('isAuth',"true")
-        localStorage.setItem('role',"edit")
-        this.router.navigate(['select'])
-      }else{
-        this.submitted = false;
-        this.snackBar.open('Invalid login credentials, please try again', '', {
-          duration: 5000,
-          verticalPosition: 'bottom',
-          panelClass: ['error-snackbar']
-        });
-      }
+      this.authService.login(loginId,password).subscribe(res=>{
+        if(res.success === "true"){
+          localStorage.setItem('token',res.data.token)
+          const tokenPayload :any = decode(res.data.token);
+          sessionStorage.setItem('role',tokenPayload.role)
+          sessionStorage.setItem('user',res.data.id)
+          this.router.navigate(['select'])
+        }else{
+          this.submitted = false;
+          this.snackBar.open('Invalid login credentials, please try again', '', {
+            duration: 5000,
+            verticalPosition: 'bottom',
+            panelClass: ['error-snackbar']
+          });
+        }
+      })
+
 
 
       

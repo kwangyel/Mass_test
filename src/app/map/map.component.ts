@@ -82,11 +82,11 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.renderMap()
-    let role = localStorage.getItem('role')
-    if(role === "view"){
+    let role = sessionStorage.getItem('role')
+    if(role === "VIEW"){
       this.showedit = false
     }
-    if(role === 'edit'){
+    if(role === 'EDIT'){
       this.showedit = true
     }
     
