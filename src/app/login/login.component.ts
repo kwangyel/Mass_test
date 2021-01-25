@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('isAuth',"true")
         localStorage.setItem('role',"view")
         this.router.navigate(['select'])
-      }else if(loginId === "123" && password === "123"){
+      }else if(loginId === "333" && password === "333"){
         localStorage.setItem('isAuth',"true")
         localStorage.setItem('role',"edit")
         this.router.navigate(['select'])

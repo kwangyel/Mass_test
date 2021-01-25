@@ -46,8 +46,7 @@ export class BottomsheetComponent implements OnInit {
 
   remarks(){
     const remarksDialog = this.dialog.open(RemarksDialogComponent,{
-      width: '250px',
-      data: "test"
+      width: '250px'
     })
     remarksDialog.afterClosed().subscribe(result => {
       if(result !== undefined){
