@@ -1,0 +1,118 @@
+
+<mat-tab-group>
+    <mat-tab label="North Mega Zone"> 
+        <br>
+        <br>
+      
+        <table class="responsive-table" style = "width:100%;">
+            <tr>
+              <th>Sl no.</th>
+              <th>Sub Zone</th>
+              <th>Progress</th>
+              <th>Percent Completed</th>
+              <th>Total Structures</th>
+              <th>Completed</th>
+              <th>Not Complete</th>
+            </tr>
+            <tr *ngFor = "let zone of northData; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{zone.name}}</td>
+                <td><mat-progress-bar mode="determinate" value={{zone.percentageCompleted}}></mat-progress-bar></td>
+                <td>{{zone.percentageCompleted}}</td>
+                <td>{{zone.totalStructures}}</td>
+                <td>{{zone.totalCompleted}}</td>
+                <td>{{zone.totalProgress}}</td>
+            </tr>
+          </table>
+          <br>
+          <br>
+
+    </mat-tab>
+
+
+    <mat-tab label="C1 Mega Zone">
+        <br>
+        <br>
+        <table class="responsive-table" style = "width:100%;">
+            <tr>
+              <th>Sl no.</th>
+              <th>Sub Zone</th>
+              <th>Progress</th>
+              <th>Percent Completed</th>
+              <th>Total Structures</th>
+              <th>Completed</th>
+              <th>Not Complete</th>
+            </tr>
+            <tr *ngFor = "let zone of c1Data; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{zone.name}}</td>
+                <td><mat-progress-bar mode="determinate" value={{zone.percentageCompleted}}></mat-progress-bar></td>
+                <td>{{zone.percentageCompleted}}</td>
+                <td>{{zone.totalStructures}}</td>
+                <td>{{zone.totalCompleted}}</td>
+                <td>{{zone.totalProgress}}</td>
+                <td>{{zone.percentageCompleted}}</td>
+            </tr>
+          </table>
+
+
+    </mat-tab>
+    <mat-tab label="C2 Mega Zone">
+        <br>
+        <br>
+          <table class="responsive-table" style = "width:100%;">
+            <tr>
+              <th>Sl no.</th>
+              <th>Sub Zone</th>
+              <th>Progress</th>
+              <th>Percent Completed</th>
+              <th>Total Structures</th>
+              <th>Completed</th>
+              <th>Not Complete</th>
+            </tr>
+            <tr *ngFor = "let zone of c2Data; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{zone.name}}</td>
+                <td><mat-progress-bar mode="determinate" value={{zone.percentageCompleted}}></mat-progress-bar></td>
+                <td>{{zone.percentageCompleted}}</td>
+                <td>{{zone.totalStructures}}</td>
+                <td>{{zone.totalCompleted}}</td>
+                <td>{{zone.totalProgress}}</td>
+                <td>{{zone.percentageCompleted}}</td>
+            </tr>
+          </table>
+
+
+    </mat-tab>
+    <mat-tab label="South Mega Zone">
+        <br>
+        <br>
+
+        <table class="responsive-table" style = "width:100%;">
+            <tr>
+              <th>Sl no.</th>
+              <th>Sub Zone</th>
+              <th>Progress</th>
+              <th>Percent Completed</th>
+              <th>Total Structures</th>
+              <th>Completed</th>
+              <th>Not Complete</th>
+              
+            </tr>
+            <tr *ngFor = "let zone of southData; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{zone.name}}</td>
+                <td><mat-progress-bar mode="determinate" value={{zone.percentageCompleted}}></mat-progress-bar></td>
+                <td>{{zone.percentageCompleted}}</td>
+
+                <td>{{zone.percentageCompleted}}</td>
+                <td>{{zone.totalStructures}}</td>
+                <td>{{zone.totalCompleted}}</td>
+                <td>{{zone.totalProgress}}</td>
+                
+            </tr>
+          </table>    
+    
+    
+    </mat-tab>
+</mat-tab-group>
