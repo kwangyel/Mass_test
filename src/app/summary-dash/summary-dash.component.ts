@@ -112,14 +112,16 @@ export class SummaryDashComponent implements OnInit,AfterViewInit {
 
       this.http.get(`${this.API_URL}/get-str/${item.id}`).subscribe((data: any) => {
         let totalCompleted = 0;
+        let totalProgress = 0;
         let totalStructures = data.length;
         data.forEach(element => {
             if(element.properties.status === "COMPLETE"){
               totalCompleted += 1;
-            }       
+            }else if(element.properties.status === "PROGRESS"){
+              totalProgress+=1;
+            }     
         });
-        let totalProgress = totalStructures- totalCompleted;
-        let percentageCompleted = (totalCompleted/totalStructures *100).toFixed(2)
+        let percentageCompleted = ((totalProgress+totalCompleted)/totalStructures *100).toFixed(2)
         this.northData.push({"name":item.name, "totalStructures": totalStructures, "totalCompleted": totalCompleted, "totalProgress":totalProgress, "percentageCompleted": percentageCompleted})
       })
     })
@@ -127,14 +129,16 @@ export class SummaryDashComponent implements OnInit,AfterViewInit {
     this.c1MegaZone.forEach(item =>{
       this.http.get(`${this.API_URL}/get-str/${item.id}`).subscribe((data: any) => {
         let totalCompleted = 0;
+        let totalProgress = 0;
         let totalStructures = data.length;
         data.forEach(element => {
             if(element.properties.status === "COMPLETE"){
               totalCompleted += 1;
-            }       
+            }else if(element.properties.status === "PROGRESS"){
+              totalProgress+=1;
+            }     
         });
-        let totalProgress = totalStructures- totalCompleted;
-        let percentageCompleted = (totalCompleted/totalStructures *100).toFixed(2)
+        let percentageCompleted = ((totalProgress+totalCompleted)/totalStructures *100).toFixed(2)
         
         this.c1Data.push({"name":item.name, "totalStructures": totalStructures, "totalCompleted": totalCompleted, "totalProgress":totalProgress, "percentageCompleted": percentageCompleted})
       })
@@ -143,14 +147,16 @@ export class SummaryDashComponent implements OnInit,AfterViewInit {
     this.c2MegaZone.forEach(item =>{
       this.http.get(`${this.API_URL}/get-str/${item.id}`).subscribe((data: any) => {
         let totalCompleted = 0;
+        let totalProgress = 0;
         let totalStructures = data.length;
         data.forEach(element => {
             if(element.properties.status === "COMPLETE"){
               totalCompleted += 1;
-            }       
+            }else if(element.properties.status === "PROGRESS"){
+              totalProgress+=1;
+            }     
         });
-        let totalProgress = totalStructures- totalCompleted;
-        let percentageCompleted = (totalCompleted/totalStructures *100).toFixed(2)
+        let percentageCompleted = ((totalProgress+totalCompleted)/totalStructures *100).toFixed(2)
         
         this.c2Data.push({"name":item.name, "totalStructures": totalStructures, "totalCompleted": totalCompleted, "totalProgress":totalProgress, "percentageCompleted": percentageCompleted})
       })
@@ -159,14 +165,16 @@ export class SummaryDashComponent implements OnInit,AfterViewInit {
     this.southMegaZone.forEach(item =>{
       this.http.get(`${this.API_URL}/get-str/${item.id}`).subscribe((data: any) => {
         let totalCompleted = 0;
+        let totalProgress = 0;
         let totalStructures = data.length;
         data.forEach(element => {
             if(element.properties.status === "COMPLETE"){
               totalCompleted += 1;
-            }       
+            }else if(element.properties.status === "PROGRESS"){
+              totalProgress+=1;
+            }     
         });
-        let totalProgress = totalStructures- totalCompleted;
-        let percentageCompleted = (totalCompleted/totalStructures *100).toFixed(2)
+        let percentageCompleted = ((totalProgress+totalCompleted)/totalStructures *100).toFixed(2)
         
         this.southData.push({"name":item.name, "totalStructures": totalStructures, "totalCompleted": totalCompleted, "totalProgress":totalProgress, "percentageCompleted": percentageCompleted})
       })
