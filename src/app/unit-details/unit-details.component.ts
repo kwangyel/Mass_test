@@ -11,7 +11,7 @@ export class UnitDetailsComponent implements OnInit {
 
   hhid:number;
   member:[];
-  displayedColumns: string[] = ['cid', 'age', 'gender','contact','occupation','workplace','workzone','covid_test_status','vaccine_status','most_active'];
+  displayedColumns: string[] = ['cid', 'age', 'gender','contact','occupation','workplace','workzone','covid_test_status','vaccine_status','most_active','action'];
 
   constructor(
     private router: Router,
@@ -29,6 +29,18 @@ export class UnitDetailsComponent implements OnInit {
         this.member = response.data
       }
     })
+  }
+
+  updateMember(memberid,status:boolean){
+    let data = {
+      "id":memberid,
+      "mass_test_status":!status
+    }
+    this.dataService.updateMember(data).subscribe(res=>{
+      console.log(res);
+      this.getMember(this.hhid);
+    })
+
   }
 
 }

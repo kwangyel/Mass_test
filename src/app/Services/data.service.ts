@@ -93,4 +93,12 @@ export class DataService {
       catchError(this.handleError)
     )
   }
+
+  updateMember(data){
+    return this.http
+    .patch<any>(`${this.HPI_URL}/member/update`,data,this.httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
 }
