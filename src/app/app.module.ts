@@ -32,6 +32,8 @@ import { ChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HttpInterceptorService } from './Services/http-interceptor.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UnitDetailsComponent } from './unit-details/unit-details.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     BottomsheetComponent,
     LoginComponent,
     RemarksDialogComponent,
-    SummaryDashComponent
+    SummaryDashComponent,
+    DashboardComponent,
+    UnitDetailsComponent
   ],
   imports: [
     BrowserModule,

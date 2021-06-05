@@ -40,6 +40,10 @@ export class BottomsheetComponent implements OnInit {
     })
 
   }
+  show(){
+    this._bottomSheetRef.dismiss()
+    this.router.navigate(['dashboard',this.data.building_id]);
+  }
 
   closeSheet(){
     this._bottomSheetRef.dismiss()

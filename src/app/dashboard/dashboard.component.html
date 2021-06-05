@@ -1,0 +1,41 @@
+<div class="form-wraper" >
+    <div class="form-container card" (click)="regHouse()" style="background-color: #f2f8f9;">
+      <div class="form-body" style="letter-spacing: 2px;margin-top: 12px;text-align: center;">
+      Building ID: {{buildingId}}
+      </div>
+    </div>
+</div>
+
+<div class="form-wraper" >
+    <div class="form-container card" style="background-color: #f2f8f9;">
+      <div class="form-body" style="letter-spacing: 2px;margin-top: 12px;text-align: center;">
+      Registered Units:
+      <!-- <ul>
+        <li *ngFor = "let unit of units">
+          {{unit.unitId}}
+        </li>
+      </ul> -->
+      <div style="display:flex;justify-content:center;">
+        <table>
+          <tr>
+            <th>Units</th>
+            <th>Head</th>
+            <th>Actions</th>
+          </tr>
+          <tr *ngFor = "let unit of units">
+            <td>
+              {{unit.unitId}}
+            </td>
+            <td>
+              {{unit.name}}
+            </td>
+            <td>
+              <button (click)="showUnitDetails(unit.id)">Show Details</button>
+            </td>
+          </tr>
+        </table>
+  
+      </div>
+      </div>
+    </div>
+</div>

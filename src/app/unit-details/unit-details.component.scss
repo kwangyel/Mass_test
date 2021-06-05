@@ -1,0 +1,20 @@
+// .my-table{
+//     // margin-right: auto;
+//     // margin-left: auto;
+//     // /* overflow: scroll; */
+//     // display: block;
+//     overflow-x: scroll;
+//     // text-align: center;
+//     width: 100%;
+// }
+.mat-header-cell, .mat-cell {
+    min-width: 100px;
+}
+.table-div{
+    overflow-x: scroll;
+    width: 100%;
+}
+.my-table{
+    width: 100%;
+
+}

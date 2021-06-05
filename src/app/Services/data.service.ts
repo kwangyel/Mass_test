@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class DataService {
   API_URL = environment.API_URL;
+  HPI_URL = environment.HPI_URL;
 
   constructor(
     private http: HttpClient
@@ -75,5 +76,21 @@ export class DataService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  getHouseholds(sid){
+    return this.http
+      .get<any>(`${this.HPI_URL}/household/get-all/${sid}`,this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+  getFamilyMembers(hhid){
+    return this.http
+    .get<any>(`${this.HPI_URL}/member/get-all/${hhid}`,this.httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    )
   }
 }
