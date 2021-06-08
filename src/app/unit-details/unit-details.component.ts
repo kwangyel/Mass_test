@@ -11,7 +11,7 @@ export class UnitDetailsComponent implements OnInit {
 
   hhid:number;
   member:[];
-  displayedColumns: string[] = ['cid', 'age', 'gender','contact','occupation','workplace','workzone','covid_test_status','vaccine_status','most_active','action'];
+  displayedColumns: string[] = ['name','cid', 'age', 'gender','contact','occupation','workplace','workzone','covid_test_status','vaccine_status','most_active','action'];
 
   constructor(
     private router: Router,
