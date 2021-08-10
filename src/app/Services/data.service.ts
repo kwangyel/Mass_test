@@ -45,6 +45,20 @@ export class DataService {
         catchError(this.handleError)
       )
   }
+  getZones(zid){
+    return this.http
+      .get<any>(`${this.API_URL}/get-subzones/${zid}`,this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+  getAllDzo(){
+    return this.http
+      .get<any>(`${this.API_URL}/get-all-dzo`,this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
 
   setProgress(sid){
     return this.http

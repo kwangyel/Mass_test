@@ -13,6 +13,8 @@ import { DataService } from '../Services/data.service';
 export class SelectZoneComponent implements OnInit {
 
   subZones = [];
+  dzongkhags = [];
+  dzongkhag:string;
   zoneForm: FormGroup;
   role = ""
   showSum = false
@@ -25,22 +27,33 @@ export class SelectZoneComponent implements OnInit {
 
   ngOnInit() {
     this.reactiveForm()
-    this.getData()
+    // this.getData()
     this.role = sessionStorage.getItem('role')
     if(this.role === "VIEW"){
       this.showSum = true
     }
+    this.dataService.getAllDzo().subscribe(res=>{
+      this.dzongkhags = res.data
+      console.log(res)
+    })
   }
-
-  getData(){
-    this.dataService.getAllZones().subscribe(res=>{
+  getSubzones(zid){
+    console.log(zid)
+    this.dataService.getZones(zid).subscribe(res=>{
       this.subZones = res.data
     })
   }
 
+  // getData(){
+  //   this.dataService.getAllZones().subscribe(res=>{
+  //     this.subZones = res.data
+  //   })
+  // }
+
   reactiveForm(){
     this.zoneForm = this.fb.group({
-      subZoneControl: ['',Validators.compose([Validators.required])]
+      subZoneControl: ['',Validators.compose([Validators.required])],
+      dzoControl: ['',Validators.compose([Validators.required])]
     })
   }
 
