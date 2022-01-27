@@ -242,7 +242,41 @@ export class MapComponent implements OnInit {
           }
         }
       }).addTo(this.map);
-      this.map.fitBounds(this.bound.getBounds());
+      // this.map.fitBounds(this.bound.getBounds());
+      this.http.get(`${this.API_URL}/get-str/${this.zoneId}`).subscribe((json: any) => {
+        this.json = json;
+        this.geojson = L.geoJSON(this.json, {
+          onEachFeature: (feature, layer) => {
+              layer.on('click', (e) => {
+                this.buildingId = feature.properties.structure_id;
+                this._bottomSheet.open(BottomsheetComponent,{
+                  data: {building_id: this.buildingId, remarks:feature.properties.remarks, showEdit: this.showedit}
+                })
+                this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe(()=>{
+                  console.log("reloaded")
+                  if(this.geobound !== undefined){
+                    this.map.removeLayer(this.geobound)
+                    this.geobound = undefined
+                  }
+                  if(this.geojson!== undefined){
+                    this.map.removeLayer(this.geojson)
+                    this.geojson= undefined
+                  }
+                  this.getBuilding(this.map)
+                })
+              });
+            }, pointToLayer: (feature, latLng) => {
+              if(feature.properties.status == 'INCOMPLETE'){
+                return L.marker(latLng, {icon: this.redMarker});
+              }else if(feature.properties.status == "PROGRESS"){
+                return L.marker(latLng, {icon: this.blue});
+              } else{
+                return L.marker(latLng, {icon: this.greenMarker});
+              }
+            }
+          }).addTo(map);
+          this.map.fitBounds(this.geojson.getBounds());
+      });
     })
     this.getBuilding(map)
   }
@@ -267,7 +301,6 @@ export class MapComponent implements OnInit {
                   this.map.removeLayer(this.geojson)
                   this.geojson= undefined
                 }
-
                 this.getBuilding(this.map)
               })
             });
