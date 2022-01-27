@@ -232,16 +232,17 @@ export class MapComponent implements OnInit {
 
   onMapReady(map: L.Map) {
     this.zoneId = Number(sessionStorage.getItem('zone'));
-    this.geobound= this.http.get(`https://zhichar-pling.ddnsfree.com/zone/map/getzone/${this.zoneId}`).subscribe((json:any)=>{
-      this.bound= L.geoJSON(json.data,{
-        style: (feature)=>{
+    this.geobound = this.http.get(`https://zhichar-pling.ddnsfree.com/zone/map/getzone/${this.zoneId}`).subscribe((json:any)=>{
+      this.bound = L.geoJSON(json.data, {
+        style: (feature) => {
           return {
-            color:"red",
-            fillOpacity:0
+            color: "yellow",
+            fillOpacity: 0,
+            weight: 2
           }
         }
       }).addTo(this.map);
-      // this.map.fitBounds(this.bound.getBounds());
+      this.map.fitBounds(this.bound.getBounds());
     })
     this.getBuilding(map)
   }
