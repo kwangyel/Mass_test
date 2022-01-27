@@ -1,13 +1,93 @@
-.my-form{
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+.main-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #F8FFD7;
+  font-weight: 300;
+  color: gray;
+}
+
+.intro{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro h1{
+  font-weight: bolder;
+}
+.logo{
+  height: 100px;
+}
+
+.apps-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 60vw;
+  gap:5%
+}
+
+.app{
+  display: flex;
+  padding: 5%;
+  margin-top: 5px;
+  background-color: gray;
+  color: #F7FFD7;
+  border-radius: 0.2rem ;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+
+
+.login-form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  width: 100%;
+  border-radius: .3rem;
+  margin: 0 0 15px;
+  border: none;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 20px;
+  appearance: none;
+}
+.login-form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  border: none;
+  background: #F8FFD7;
+  font-weight: bolder;
+  width: 100%;
+  border-radius: .3rem;
+  padding: 15px;
+  color: gray;
+  font-size: 20px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+
+
+@media (max-width: 1000px) {
+  .apps-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100vw;
+    gap:5%
   }
-  
-  .full-width {
-    width: 100%;
-  }
-  
-  .invalid {
-    border: 1px solid #ea6153;
-  }
+ }
+
+
+
+
+
+

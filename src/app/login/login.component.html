@@ -1,23 +1,36 @@
-<div class="form-wraper" >
-    <div class="form-container card">
-      <div class="form-header">
-        <img src="../../assets/logo.svg"  class="main-lock-icon" alt="">
-      </div>
-      <div class="form-body">
-        <form [formGroup]="loginForm">
-          <mat-form-field class="justifier">
-            <input matInput type="text" placeholder="CID Number" class="form-input" name="cid" formControlName="cid" required autofocus>
-          </mat-form-field>
-          <mat-form-field class="justifier">
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" class="form-input" name="password" formControlName="password"  required>
-            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-          </mat-form-field>
+<div class="main-container">
+
+  <div class="intro">
+
+    <img src="../../assets/app-logo.png" class="logo" alt="">
+    <h1>
+      Zhichar | གཞིས འཆར།།
+    </h1>
+  </div>
+
+  <div class="apps-container">
+    <div class="app">
+      <!-- <h2 class="title" (click)="goToHHSurveyDashboard()"> -->
+      <h2 class="title">
+
+        MassTesting 
+      </h2>
+      <div>
+        <form class="login-form" [formGroup]="loginForm" >
+          <input type="text" placeholder="username"  formControlName="cid" />
+          <input type="password" placeholder="password"  formControlName="password"/>
+          <button (click)="login()">login</button>
         </form>
       </div>
-      <div class="form-footer">
-          <button mat-raised-button class="btn custom-btn" (click)="login()" color="primary" [disabled]="!loginForm.valid"><mat-icon>input</mat-icon> Login</button>
-      </div>
     </div>
+   
   </div>
+
+  <!-- <div>
+      <p>
+      Developed by the National Zoning TaskForce with assistance from Department of Human Settlements, MoWHS.
+
+      </p>
+  </div> -->
+
+</div>
