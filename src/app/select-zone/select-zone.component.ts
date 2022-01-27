@@ -13,6 +13,7 @@ import { DataService } from '../Services/data.service';
 export class SelectZoneComponent implements OnInit {
 
   subZones = [];
+  zones = [];
   dzongkhags = [];
   dzongkhag:string;
   zoneForm: FormGroup;
@@ -39,20 +40,21 @@ export class SelectZoneComponent implements OnInit {
   }
   getSubzones(zid){
     console.log(zid)
-    this.dataService.getZones(zid).subscribe(res=>{
-      this.subZones = res.data
+    this.dataService.getSubZones(zid).subscribe(res=>{
+      this.subZones= res.data
     })
   }
 
-  // getData(){
-  //   this.dataService.getAllZones().subscribe(res=>{
-  //     this.subZones = res.data
-  //   })
-  // }
+  getZones(dzoId){
+    this.dataService.getZones(dzoId).subscribe(res=>{
+      this.zones = res.data
+    })
+  }
 
   reactiveForm(){
     this.zoneForm = this.fb.group({
       subZoneControl: ['',Validators.compose([Validators.required])],
+      zoneControl: ['',Validators.compose([Validators.required])],
       dzoControl: ['',Validators.compose([Validators.required])]
     })
   }

@@ -45,9 +45,16 @@ export class DataService {
         catchError(this.handleError)
       )
   }
-  getZones(zid){
+  getSubZones(zid){
     return this.http
       .get<any>(`${this.API_URL}/get-subzones/${zid}`,this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+  getZones(dzoId){
+    return this.http
+      .get<any>(`${this.API_URL}/get-zones/${dzoId}`,this.httpOptions)
       .pipe(
         catchError(this.handleError)
       )

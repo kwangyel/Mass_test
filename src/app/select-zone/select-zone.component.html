@@ -7,7 +7,7 @@
       <form [formGroup]="zoneForm">
         <mat-form-field class="justifier">
           <mat-label>Select Dzongkhag</mat-label>
-          <mat-select #dzong formControlName="dzoControl" name="dzong" (selectionChange)="getSubzones(dzong.value)" required>
+          <mat-select #dzong formControlName="dzoControl" name="dzong" (selectionChange)="getZones(dzong.value)" required>
             <mat-option *ngFor="let dzo of dzongkhags" [value]="dzo.id">
               {{dzo.name}}
             </mat-option>
@@ -16,6 +16,15 @@
 
         <mat-form-field class="justifier">
           <mat-label>Select Zone</mat-label>
+          <mat-select #zone formControlName="zoneControl" name="zone" (selectionChange)="getSubzones(zone.value)"  required>
+            <mat-option *ngFor="let zone of zones" [value]="zone.id">
+              {{zone.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="justifier">
+          <mat-label>Select Sub Zone</mat-label>
           <mat-select formControlName="subZoneControl" name="subZone"  required>
             <mat-option *ngFor="let subZone of subZones" [value]="subZone.id">
               {{subZone.name}}

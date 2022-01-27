@@ -5,6 +5,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+export const TOKEN = "token";
+export const ROLE = "role";
+export const SCOPE = "scope";
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +33,7 @@ export class AuthService {
     }).pipe(
       map(
         data => {
+          sessionStorage.setItem(ROLE,data.data.role)
           this.authState.next(true);
           return data;
       })); 

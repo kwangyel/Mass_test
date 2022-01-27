@@ -241,7 +241,7 @@ export class MapComponent implements OnInit {
           }
         }
       }).addTo(this.map);
-      this.map.fitBounds(this.bound.getBounds());
+      // this.map.fitBounds(this.bound.getBounds());
     })
     this.getBuilding(map)
   }
@@ -284,6 +284,7 @@ export class MapComponent implements OnInit {
             }
           }
         }).addTo(map);
+        this.map.fitBounds(this.geojson.getBounds());
     });
   }
 
