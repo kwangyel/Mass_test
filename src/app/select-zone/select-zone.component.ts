@@ -12,13 +12,22 @@ import { DataService } from '../Services/data.service';
 })
 export class SelectZoneComponent implements OnInit {
 
-  subZones = [];
-  zones = [];
-  dzongkhags = [];
+  // subZones = [];
+  // zones = [];
+  // dzongkhags = [];
   dzongkhag:string;
   zoneForm: FormGroup;
   role = ""
   showSum = false
+
+
+  dzongkhags = [];
+  zones = [];
+  subzones = [];
+  selectDzongkhagForm: FormGroup;
+  dzongkhagId: number = Number(sessionStorage.getItem("selectedDzongkhagId")) ? Number(sessionStorage.getItem("selectedDzongkhagId")) : null;
+  zoneId: number;
+  subzoneId: number;
 
   constructor(
     private router: Router,
@@ -38,18 +47,18 @@ export class SelectZoneComponent implements OnInit {
       console.log(res)
     })
   }
-  getSubzones(zid){
-    console.log(zid)
-    this.dataService.getSubZones(zid).subscribe(res=>{
-      this.subZones= res.data
-    })
-  }
+  // getSubzones(zid){
+  //   console.log(zid)
+  //   this.dataService.getSubZones(zid).subscribe(res=>{
+  //     this.subZones= res.data
+  //   })
+  // }
 
-  getZones(dzoId){
-    this.dataService.getZones(dzoId).subscribe(res=>{
-      this.zones = res.data
-    })
-  }
+  // getZones(dzoId){
+  //   this.dataService.getZones(dzoId).subscribe(res=>{
+  //     this.zones = res.data
+  //   })
+  // }
 
   reactiveForm(){
     this.zoneForm = this.fb.group({
@@ -59,14 +68,26 @@ export class SelectZoneComponent implements OnInit {
     })
   }
 
-  submit(){
-    if(this.zoneForm.valid){
-      sessionStorage.setItem("zone",this.zoneForm.get('subZoneControl').value)
-      this.router.navigate(['map'])
-    }
+  getZoneList(dzo_id) {
+    this.dataService.getZones(dzo_id).subscribe(res => {
+      this.zones = res.data
+    })
   }
 
-  showSummary(){
-    this.router.navigate(['summary'])
+  getSubZoneList(zoneId) {
+    this.dataService.getSubZones(zoneId).subscribe(res => {
+      this.subzones = res.data
+      this.subzones.sort(function (a, b) {
+        if (a.name < b.name) { return -1; }
+        return 0;
+      })
+    })
+  }
+
+  submit(){
+    if(this.dzongkhagId && this.subzoneId && this.zoneId){
+      sessionStorage.setItem("zone",String(this.subzoneId))
+      this.router.navigate(['map'])
+    }
   }
 }

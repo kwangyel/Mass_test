@@ -1,11 +1,4 @@
-<mat-toolbar>
-    <span style="text-align:center;">Select a structure</span>
-    <span class="menu-spacer"></span>
-    <!-- <button mat-raised-button (click)="toggleAdd()" color="primary" *ngIf = "showedit">
-        <mat-icon >add</mat-icon>
-        <mat-label>Add Structure</mat-label>
-    </button> -->
-</mat-toolbar>
+
 <div class="map-container">
 <div class="map-frame">
     <div id="map">
@@ -15,20 +8,8 @@
             border-radius: 23px;
             height: 42px;
             background: #ffffffa3;
-            margin-bottom: 80px;
             border: none;" class=" span3 leaflet-control" (click)="getMyLocation()">
                 <mat-icon style="color: blue;">location_searching</mat-icon>
-            </button>
-        </div>
-        <div class = "leaflet-bottom leaflet-right">
-            <button *ngIf = "!isDisabled" style="
-            width: 42px;
-            border-radius: 23px;
-            height: 42px;
-            background: #ffffffa3;
-            margin-bottom: 20px;
-            border: none;"  class=" span3 leaflet-control" (click)="stopLocation()">
-            <mat-icon>location_off</mat-icon>
             </button>
         </div>
     </div>

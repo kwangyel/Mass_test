@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="form-wraper">
   <div class="form-container card">
     <div class="form-header">
@@ -46,4 +46,53 @@
   </div>
 </div>
 
+ -->
 
+
+ <div class="main-container">
+  <div class="selectDzongkhag-container">
+      <div class="selectDzongkhag-form">
+
+          <p style="text-align: center;font-weight: 500;">
+              Select Dzongkhag
+          </p>
+
+          <div class="dropdown-container">
+              <div class="select-dropdown">
+                  <select class="custom-select" [(ngModel)]="dzongkhagId" (change)="getZoneList(dzongkhagId)">
+                      <option *ngFor="let dzongkhag of dzongkhags" [value]="dzongkhag.id" > {{ dzongkhag.name }}
+                      </option>
+                  </select>
+              </div>
+          </div>
+          <p style="text-align: center;font-weight: 500;">
+              Select Zone
+          </p>
+          <div class="dropdown-container">
+              <div class="select-dropdown">
+                  <select class="custom-select" [(ngModel)]="zoneId" (change)="getSubZoneList(zoneId)" >
+                      <option *ngFor="let zone of zones" [value]="zone.id"> {{ zone.name }}
+                      </option>
+                  </select>
+              </div>
+          </div>
+
+          <p style="text-align: center;font-weight: 500;">
+              Select SubZone
+          </p>
+          <div class="dropdown-container">
+              <div class="select-dropdown">
+                  <select class="custom-select" [(ngModel)]="subzoneId" >
+                      <option *ngFor="let subzone of subzones" [value]="subzone.id" style="word-wrap: break-word;"> {{ subzone.name }}
+                      </option>
+                  </select>
+              </div>
+          </div>
+      </div>
+      <div class="button-container" (click)="submit()" >
+          <button class="submit-button">
+              <span>Proceed</span>
+          </button>
+      </div>
+  </div>
+</div>

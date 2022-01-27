@@ -4,9 +4,9 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #F8FFD7;
+  // background-color: #F8FFD7;
   font-weight: 300;
-  color: gray;
+  // color: gray;
 }
 
 .intro{
@@ -17,6 +17,7 @@
 
 .intro h1{
   font-weight: bolder;
+  color: gray;
 }
 .logo{
   height: 100px;
@@ -35,7 +36,7 @@
   display: flex;
   padding: 5%;
   margin-top: 5px;
-  background-color: gray;
+  background-color: rgb(163, 163, 163);
   color: #F7FFD7;
   border-radius: 0.2rem ;
   flex-direction: column;
@@ -61,7 +62,6 @@
   text-transform: uppercase;
   outline: 0;
   border: none;
-  background: #F8FFD7;
   font-weight: bolder;
   width: 100%;
   border-radius: .3rem;

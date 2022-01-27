@@ -352,4 +352,9 @@ export class MapComponent implements OnInit {
     });
   }
 
+  goToZoneSelection(){
+    console.log("ok")
+    this.router.navigate(['select'])
+  }
+
 }
