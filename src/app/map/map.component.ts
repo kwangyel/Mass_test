@@ -246,7 +246,6 @@ export class MapComponent implements OnInit {
     })
     this.getBuilding(map)
   }
-
   getBuilding(map: L.Map){
     // Added buildings here
     this.http.get(`${this.API_URL}/get-str/${this.zoneId}`).subscribe((json: any) => {
