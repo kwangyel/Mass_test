@@ -24,6 +24,7 @@ export class SelectZoneComponent implements OnInit {
   dzongkhags = [];
   zones = [];
   subzones = [];
+  subZones = [];
   selectDzongkhagForm: FormGroup;
   dzongkhagId: number = Number(sessionStorage.getItem("selectedDzongkhagId")) ? Number(sessionStorage.getItem("selectedDzongkhagId")) : null;
   zoneId: number;
@@ -51,18 +52,17 @@ export class SelectZoneComponent implements OnInit {
       this.zones = res.data
     })
   }
-  // getSubzones(zid){
-  //   console.log(zid)
-  //   this.dataService.getSubZones(zid).subscribe(res=>{
-  //     this.subZones= res.data
-  //   })
-  // }
+  getSubzones(zid){
+    this.dataService.getSubZones(zid).subscribe(res=>{
+      this.subZones= res.data
+    })
+  }
 
-  // getZones(dzoId){
-  //   this.dataService.getZones(dzoId).subscribe(res=>{
-  //     this.zones = res.data
-  //   })
-  // }
+  getZones(dzoId){
+    this.dataService.getZones(dzoId).subscribe(res=>{
+      this.zones = res.data
+    })
+  }
 
   reactiveForm(){
     this.zoneForm = this.fb.group({
@@ -90,9 +90,14 @@ export class SelectZoneComponent implements OnInit {
   }
 
   submit(){
-    if(this.dzongkhagId && this.subzoneId && this.zoneId){
-      sessionStorage.setItem("zone",String(this.subzoneId))
-      this.router.navigate(['map'])
+    // if(this.dzongkhagId && this.subzoneId && this.zoneId){
+    //   sessionStorage.setItem("zone",String(this.subzoneId))
+    //   this.router.navigate(['map'])
+    // }
+
+    if(this.zoneForm.valid){
+        sessionStorage.setItem("zone",this.zoneForm.get('subZoneControl').value)
+        this.router.navigate(['map'])
     }
   }
 }
