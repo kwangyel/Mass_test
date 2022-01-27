@@ -69,6 +69,8 @@ export class MapComponent implements OnInit {
     iconSize: [15,15]
   });
 
+  selectedBuilding;
+
   constructor(
     private snackBar: MatSnackBar,
     private http: HttpClient,
@@ -114,7 +116,6 @@ export class MapComponent implements OnInit {
       "OSM base map": osm 
     };
 
-    L.control.layers(baseMaps,null,{position:"topleft"}).addTo(this.map);
     this.onMapReady(this.map)
 
     this.map.on('locationerror',(err)=>{
@@ -163,7 +164,6 @@ export class MapComponent implements OnInit {
         }
       }
     });
-
 
     this.map.on('click', <LeafletMouseEvent>($e) => {
       if (this.isAddAllowed) {
@@ -251,12 +251,10 @@ export class MapComponent implements OnInit {
     // Added buildings here
     this.http.get(`${this.API_URL}/get-str/${this.zoneId}`).subscribe((json: any) => {
       this.json = json;
-      console.log(json);
       this.geojson = L.geoJSON(this.json, {
         onEachFeature: (feature, layer) => {
             layer.on('click', (e) => {
               this.buildingId = feature.properties.structure_id;
-              console.log(this.buildingId);
               this._bottomSheet.open(BottomsheetComponent,{
                 data: {building_id: this.buildingId, remarks:feature.properties.remarks, showEdit: this.showedit}
               })
@@ -266,7 +264,6 @@ export class MapComponent implements OnInit {
                   this.map.removeLayer(this.geobound)
                   this.geobound = undefined
                 }
-
                 if(this.geojson!== undefined){
                   this.map.removeLayer(this.geojson)
                   this.geojson= undefined
@@ -285,7 +282,7 @@ export class MapComponent implements OnInit {
             }
           }
         }).addTo(map);
-        this.map.fitBounds(this.geojson.getBounds());
+        // this.map.fitBounds(this.geojson.getBounds());
     });
   }
 
