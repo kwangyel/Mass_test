@@ -46,6 +46,10 @@ export class SelectZoneComponent implements OnInit {
       this.dzongkhags = res.data
       console.log(res)
     })
+
+    this.dataService.getZones(1).subscribe(res => {
+      this.zones = res.data
+    })
   }
   // getSubzones(zid){
   //   console.log(zid)
@@ -69,6 +73,7 @@ export class SelectZoneComponent implements OnInit {
   }
 
   getZoneList(dzo_id) {
+
     this.dataService.getZones(dzo_id).subscribe(res => {
       this.zones = res.data
     })
