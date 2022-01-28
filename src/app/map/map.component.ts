@@ -267,11 +267,11 @@ export class MapComponent implements OnInit {
               });
             }, pointToLayer: (feature, latLng) => {
               if(feature.properties.status == 'INCOMPLETE'){
-                return L.marker(latLng, {icon: this.redMarker});
+                return new L.Circle(latLng, {radius:5, color:"red", fillColor:"red",fillOpacity:1});
               }else if(feature.properties.status == "PROGRESS"){
-                return L.marker(latLng, {icon: this.blue});
+                return new L.Circle(latLng, {radius:5, color:"#0ACAF5",fillColor:"#0ACAF5",fillOpacity:1});
               } else{
-                return L.marker(latLng, {icon: this.greenMarker});
+                return new L.Circle(latLng, {radius:5, color:"#00E826",fillColor:"#00E826",fillOpacity:1});
               }
             }
           }).addTo(map);
@@ -306,11 +306,11 @@ export class MapComponent implements OnInit {
             });
           }, pointToLayer: (feature, latLng) => {
             if(feature.properties.status == 'INCOMPLETE'){
-              return L.marker(latLng, {icon: this.redMarker});
+              return new L.Circle(latLng, {radius:5, color:"red", fillColor:"red",fillOpacity:1});
             }else if(feature.properties.status == "PROGRESS"){
-              return L.marker(latLng, {icon: this.blue});
+              return new L.Circle(latLng, {radius:5, color:"#0ACAF5",fillColor:"#0ACAF5",fillOpacity:1});
             } else{
-              return L.marker(latLng, {icon: this.greenMarker});
+              return new L.Circle(latLng, {radius:5, color:"#00E826",fillColor:"#00E826",fillOpacity:1});
             }
           }
         }).addTo(map);
