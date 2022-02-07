@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
-import { MatSnackBar, MatDialog, MatBottomSheet } from '@angular/material';
+import { MatSnackBar, MatDialog, MatBottomSheet, throwToolbarMixedModesError } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { DataService } from '../Services/data.service';
@@ -42,7 +42,31 @@ export class MapComponent implements OnInit {
   isLocation = false
   isDisabled = true
 
+  testCenters:any; 
+
+  //globals
+  dzongkhagId:any;
+
+  //controls
+  overlayMaps = {};
+  mapLayerControl: L.Control;
+
   showedit = false 
+
+
+  testCenterSvg = `<?xml version="1.0" encoding="iso-8859-1"?> <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 280.028 280.028" style="enable-background:new 0 0 280.028 280.028;" xml:space="preserve"> <g> <path style="fill:#EBEBEB;" d="M140.014,0c77.323,0,140.014,62.691,140.014,140.014c0,77.314-62.691,140.014-140.014,140.014 S0,217.336,0,140.014S62.682,0,140.014,0z"/> <path style="fill:#E2574C;" d="M78.749,113.787h35.135V78.749c0-4.83,3.912-8.751,8.742-8.751h34.968 c4.822,0,8.733,3.92,8.733,8.751v35.03h34.951c4.839,0,8.751,3.912,8.751,8.751v35.012c0,4.848-3.912,8.768-8.751,8.768h-34.951 v34.933c0,4.839-3.912,8.751-8.733,8.751h-34.968c-4.83,0-8.742-3.912-8.742-8.751V166.31H78.749c-4.839,0-8.76-3.92-8.76-8.768 V122.53C69.989,117.699,73.91,113.787,78.749,113.787z"/> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </svg>`;
+
+  testCenterMarker = 'data:image/svg+xml;base64,' + btoa(this.testCenterSvg);
+  
+  // testCenterIcon = L.icon({
+  //   iconUrl: this.testCenterMarker
+  // });
+ testCenterIcon = L.divIcon({
+   html:this.testCenterSvg,
+   className:"",
+   iconSize:[40,40],
+   iconAnchor:[10,10]
+ }) 
 
   myMarker = L.icon({
     iconUrl: 'assets/mymarker.png',
@@ -83,6 +107,9 @@ export class MapComponent implements OnInit {
    }
 
   ngOnInit() {
+    if(sessionStorage.getItem('dzo') !== null){
+      this.dzongkhagId = sessionStorage.getItem('dzo')
+    }
     this.renderMap()
     let role = sessionStorage.getItem('role')
     if(role === "VIEW"){
@@ -91,7 +118,7 @@ export class MapComponent implements OnInit {
     if(role === 'EDIT'){
       this.showedit = true
     }
-    
+
   }
 
 
@@ -230,6 +257,35 @@ export class MapComponent implements OnInit {
     // this.map.stopLocate()
   }
 
+  renderCheckPoint(){
+    console.log(this.dzongkhagId)
+    if(this.dzongkhagId !== undefined){
+      this.http.get(`https://zhichar-pling.ddnsfree.com/cdrs/api/shapefile/get-test-center/${this.dzongkhagId}`).subscribe((json:any)=>{
+        console.log("sdfsdfsdf")
+        console.log(json)
+        this.testCenters = L.geoJSON(json,{
+          onEachFeature:(feature,layer)=>{
+            layer.on('click', (e) => {
+              layer.bindPopup(
+                '<p style:"color:tomtato"> <span style="font-weight:bold;">Test Center Name: </span> ' + feature.properties.name+ '</p>'
+              )
+            })
+          },
+          pointToLayer:(feature,latlng)=>{
+            return L.marker(latlng,{
+              icon: this.testCenterIcon,
+            });
+          }
+        }).addTo(this.map);
+        this.overlayMaps = {
+          "Testing Center": this.testCenters
+        };
+        this.mapLayerControl = L.control.layers(null, this.overlayMaps).addTo(this.map);
+      })
+
+    }
+  }
+
   onMapReady(map: L.Map) {
     this.zoneId = Number(sessionStorage.getItem('zone'));
     this.geobound = this.http.get(`https://zhichar-pling.ddnsfree.com/zone/map/getzone/${this.zoneId}`).subscribe((json:any)=>{
@@ -279,7 +335,9 @@ export class MapComponent implements OnInit {
       });
     })
     this.getBuilding(map)
+    this.renderCheckPoint();
   }
+
   getBuilding(map: L.Map){
     // Added buildings here
     this.http.get(`${this.API_URL}/get-str/${this.zoneId}`).subscribe((json: any) => {

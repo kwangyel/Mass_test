@@ -97,6 +97,7 @@ export class SelectZoneComponent implements OnInit {
 
     if(this.zoneForm.valid){
         sessionStorage.setItem("zone",this.zoneForm.get('subZoneControl').value)
+        sessionStorage.setItem("dzo",this.zoneForm.get('dzoControl').value)
         this.router.navigate(['map'])
     }
   }
